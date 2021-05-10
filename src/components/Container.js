@@ -47,11 +47,11 @@ export const Container = () => {
                   <h1 className="title" >Weather App</h1>
                <div className="card-body2" >
                   <h3 className="title" >
-                      { `${ dataApi ? dataApi.sys.country : '...'} / ${ dataApi  ? dataApi.name : '...'}` } 
+                      { `${ dataApi === true  ? dataApi.sys.country : '...'} / ${ dataApi === true   ? dataApi.name : '...'}` } 
                   </h3>
                   <div className="row father-tem-icon">
                      <div className="temperature" >
-                        { dataApi  ? `${newValue}` : '' }
+                        { dataApi === true  ? `${newValue}` : '' }
                      </div>
                      <div className="icon-weather" >
                         <IconWeather />
@@ -63,7 +63,7 @@ export const Container = () => {
                            Description :
                         </div>
                         <div className="contents" >
-                           { dataApi ? dataApi.weather[0].description : '' } 
+                           { dataApi === true ? dataApi.weather[0].description : '' } 
                         </div>
                      </div>
                      <div className="description" >
@@ -71,7 +71,7 @@ export const Container = () => {
                            Humidity :
                         </div>
                         <div className="contents" >
-                           {` ${ dataApi ? `${dataApi.main.humidity}%` : '' } ` } 
+                           {` ${ dataApi === true ? `${dataApi.main.humidity}%` : '' } ` } 
                         </div>
                      </div>
                      <div className="description" >
@@ -79,7 +79,7 @@ export const Container = () => {
                            Temperature max :
                         </div>
                         <div className="contents" >
-                           {` ${ dataApi ? `${Math.round(dataApi.main.temp_max - 273.15)}°` : '' } ` } 
+                           {` ${ dataApi === true ? `${Math.round(dataApi.main.temp_max - 273.15)}°` : '' } ` } 
                         </div>
                      </div>
                      <div className="description" >
@@ -87,7 +87,7 @@ export const Container = () => {
                            Pressure :
                         </div>
                         <div className="contents" >
-                           {` ${ dataApi ? `${dataApi.main.pressure}mbar` : '' } ` } 
+                           {` ${ dataApi === true ? `${dataApi.main.pressure}mbar` : '' } ` } 
                         </div>
                      </div>
                   </div>
