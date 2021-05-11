@@ -9,6 +9,7 @@ export const Container = () => {
    const [temp, setTemp] = useState(0)
    const [bolean, setBolean] = useState(false)
    const [newValue, setNewValue] = useState(0)
+   const [isLoadin, setIsLoadin] = useState(false)
    
    useEffect(() => {
       navigator.geolocation.getCurrentPosition(function(position) {
@@ -16,17 +17,18 @@ export const Container = () => {
          const lon = position.coords.longitude;
          request(lat, lon)
       });
-      
-      const request = (lat, lon) => {
+
+      const request = async(lat, lon) => {
          const url = `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=56056bc63b99160f81b767f8a3c68875`;
          
-         fetch(url)
+         await fetch(url)
          .then( (response) => response.json() )
          .then( ( data ) => {
             setDataApi(data)
             setTemp( data.main.temp)
             setNewValue( ` ${Math.round(data.main.temp - 273.15)}°C ` )
             console.log(data);
+            setIsLoadin(true)
          })
       }
    },[])
@@ -47,11 +49,12 @@ export const Container = () => {
                   <h1 className="title" >Weather App</h1>
                <div className="card-body2" >
                   <h3 className="title" >
-                      { `${ dataApi === true  ? dataApi.sys.country : '...'} / ${ dataApi === true   ? dataApi.name : '...'}` } 
+                      { `${ isLoadin === true  ? dataApi.sys.country : '...'} / ${ isLoadin === true   ? dataApi.name : '...'}` } 
+
                   </h3>
                   <div className="row father-tem-icon">
                      <div className="temperature" >
-                        { dataApi === true  ? `${newValue}` : '' }
+                        { isLoadin === true  ? `${newValue}` : '' }
                      </div>
                      <div className="icon-weather" >
                         <IconWeather />
@@ -63,7 +66,7 @@ export const Container = () => {
                            Description :
                         </div>
                         <div className="contents" >
-                           { dataApi === true ? dataApi.weather[0].description : '' } 
+                           { isLoadin === true ? dataApi.weather[0].description : '' } 
                         </div>
                      </div>
                      <div className="description" >
@@ -71,7 +74,7 @@ export const Container = () => {
                            Humidity :
                         </div>
                         <div className="contents" >
-                           {` ${ dataApi === true ? `${dataApi.main.humidity}%` : '' } ` } 
+                           {` ${ isLoadin === true ? `${dataApi.main.humidity}%` : '' } ` } 
                         </div>
                      </div>
                      <div className="description" >
@@ -79,7 +82,7 @@ export const Container = () => {
                            Temperature max :
                         </div>
                         <div className="contents" >
-                           {` ${ dataApi === true ? `${Math.round(dataApi.main.temp_max - 273.15)}°` : '' } ` } 
+                           {` ${ isLoadin === true ? `${Math.round(dataApi.main.temp_max - 273.15)}°` : '' } ` } 
                         </div>
                      </div>
                      <div className="description" >
@@ -87,7 +90,7 @@ export const Container = () => {
                            Pressure :
                         </div>
                         <div className="contents" >
-                           {` ${ dataApi === true ? `${dataApi.main.pressure}mbar` : '' } ` } 
+                           {` ${ isLoadin === true ? `${dataApi.main.pressure}mbar` : '' } ` } 
                         </div>
                      </div>
                   </div>
