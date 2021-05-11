@@ -13,13 +13,13 @@
   margin-top: 4px;
   text-align: center;
 }
-.card2 {
+.card-container {
   border: solid;
   border-radius: 18px;
   min-width: 450px;
 }
-.card-body2 {
-  background-color: rgba(37, 127, 211, 0.63);
+.card-body {
+  background-color: rgba(49, 137, 219, 0.63);
 }
 .father-tem-icon {
   max-height: 120px;
