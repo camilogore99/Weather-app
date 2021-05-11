@@ -20,7 +20,6 @@ export const Container = () => {
          const lon = position.coords.longitude;
          request(lat, lon)
       });
-
       const request = async(lat, lon) => {
          const url = `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=56056bc63b99160f81b767f8a3c68875`;
          await fetch(url)
@@ -33,7 +32,7 @@ export const Container = () => {
                   })
       }
    },[])
-
+   
    const changeTemp = () => {
       setBolean(!bolean)
       if (bolean) {
@@ -79,7 +78,7 @@ export const Container = () => {
                      </div>
                   </div>
                </div>
-                  <div className="button mt-2"> <ButtonTemp changeTemp={changeTemp}  /> </div>
+                  <div className="button mt-2"> <ButtonTemp changeTemp={changeTemp} /> </div>
             </div>
          </div>
       </div>
