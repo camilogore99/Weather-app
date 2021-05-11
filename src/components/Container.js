@@ -15,24 +15,26 @@ export const Container = () => {
    const [isLoadin, setIsLoadin] = useState(false)
    
    useEffect(() => {
+
       navigator.geolocation.getCurrentPosition(function(position) {
          const lat = position.coords.latitude;
          const lon = position.coords.longitude;
          request(lat, lon)
       });
+      
       const request = async(lat, lon) => {
          const url = `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=56056bc63b99160f81b767f8a3c68875`;
          await fetch(url)
-                  .then( (response) => response.json() )
+                  .then( ( response ) => response.json() )
                   .then( ( data ) => {
-                     setDataApi(data)
-                     setTemp( data.main.temp)
-                     setNewValue( `${Math.round(data.main.temp - 273.15)}°C ` )
-                     setIsLoadin(true)
+                     setDataApi( data )
+                     setTemp( data.main.temp )
+                     setNewValue( `${Math.round(data.main.temp - 273.15)}°C` )
+                     setIsLoadin( true )
                   })
       }
    },[])
-   
+
    const changeTemp = () => {
       setBolean(!bolean)
       if (bolean) {
@@ -41,6 +43,7 @@ export const Container = () => {
          setNewValue( `${Math.round(((temp - 273.15) * 9/5 + 32))}°F`)
       }
    }
+
    return (
       <div className="container">
          <div className="row">
@@ -53,7 +56,7 @@ export const Container = () => {
                   </h3>
                   <div className="row father-tem-icon">
                      <div className="temperature" >
-                        <Temperature temp={isLoadin === true  ? `${newValue}` : '' } />
+                        <Temperature temp={isLoadin === true ? `${newValue}` : ''} />
                      </div>
                      <div className="icon-weather" >
                         <IconWeather />
@@ -62,11 +65,11 @@ export const Container = () => {
                   <div className="row" >
                      <div className="description">
                         <InfoWeather title={'Description'} 
-                        info={isLoadin === true ? dataApi.weather[0].description : '' }/>
+                        info={isLoadin === true ? dataApi.weather[0].description : ''}/>
                      </div>
                      <div className="description">
                         <InfoWeather title={'Humidity'} 
-                        info={isLoadin === true ? `${dataApi.main.humidity}%` : '' } />
+                        info={isLoadin === true ? `${dataApi.main.humidity}%` : ''} />
                      </div>
                      <div className="description">
                         <InfoWeather title={'Temperature max'} 
@@ -74,7 +77,7 @@ export const Container = () => {
                      </div>
                      <div className="description">
                         <InfoWeather title={'Pressure'} 
-                        info={ isLoadin === true ? `${dataApi.main.pressure}mbar` : ''  } />
+                        info={ isLoadin === true ? `${dataApi.main.pressure}mbar` : ''} />
                      </div>
                   </div>
                </div>

@@ -16,7 +16,7 @@
 .card-container {
   border: solid;
   border-radius: 18px;
-  min-width: 450px;
+  min-width: 200px;
 }
 .card-body {
   background-color: rgba(49, 137, 219, 0.63);
