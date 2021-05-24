@@ -8,6 +8,8 @@ import { Town } from './Town'
 
 export const Container = () => {
 
+   // we create the state variables which are going to store, the changes in the api
+
    const [dataApi, setDataApi] = useState({})
    const [temp, setTemp] = useState(0)
    const [bolean, setBolean] = useState(false)
@@ -16,14 +18,20 @@ export const Container = () => {
    
    useEffect(() => {
 
+      //we obtain the location, with its latitude and longitude
+
       navigator.geolocation.getCurrentPosition(function(position) {
          const lat = position.coords.latitude;
          const lon = position.coords.longitude;
          request(lat, lon)
       });
       
+      //We create a request function that is responsible for making the request to the api with the coordinates
+
       const request = async(lat, lon) => {
-         const url = `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=56056bc63b99160f81b767f8a3c68875`;
+
+         const url = `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&           appid=56056bc63b99160f81b767f8a3c68875`;
+
          await fetch(url)
                   .then( ( response ) => response.json() )
                   .then( ( data ) => {
@@ -35,6 +43,8 @@ export const Container = () => {
       }
    },[])
 
+   // We create a function called changeTemp which will be in charge of changing our temperature
+
    const changeTemp = () => {
       setBolean(!bolean)
       if (bolean) {
@@ -43,6 +53,8 @@ export const Container = () => {
          setNewValue( `${Math.round(((temp - 273.15) * 9/5 + 32))}°F`)
       }
    }
+
+   // we created our card to show the weather with its different components
 
    return (
       <div className="container">
