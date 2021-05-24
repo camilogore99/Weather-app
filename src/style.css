@@ -1,3 +1,6 @@
+body {
+  background: linear-gradient(120deg, #c1d5e2, #1781be);
+}
 .container {
   display: flex;
   justify-content: center;
@@ -20,7 +23,7 @@
   min-width: 200px;
 }
 .card-body {
-  background-color: rgba(49, 137, 219, 0.63);
+  background-color: rgba(14, 122, 223, 0.63);
 }
 .father-tem-icon {
   max-height: 120px;
